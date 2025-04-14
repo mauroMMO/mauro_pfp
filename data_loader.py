@@ -4,25 +4,25 @@ from langchain.schema import Document
 
 class DataLoader:
     """
-    Classe responsável pelo carregamento de arquivos PDF, seja de um único arquivo ou de um diretório inteiro.
+    Class responsible for loading PDF files, either a single file or an entire directory.
 
-    Atributos:
-        Nenhum atributo fixo. Métodos são responsáveis por retornar os dados processados diretamente.
+    Attributes:
+        No fixed attributes. Methods are responsible for directly returning the processed data.
     """
 
     def load_pdfs_from_directory(self, path):
         """
-        Carrega e processa todos os arquivos PDF de um diretório especificado.
+        Loads and processes all PDF files from a specified directory.
 
         Args:
-            path (str): Caminho para o diretório contendo os arquivos PDF.
+            path (str): Path to the directory containing the PDF files.
 
         Returns:
-            list: Lista de objetos `Document`, onde cada objeto representa o conteúdo de uma página de um PDF.
+            list: List of `Document` objects, where each object represents the content of a PDF page.
 
-        Obs:
-            Apenas arquivos com a extensão `.pdf` são processados. O conteúdo de cada página é armazenado 
-            como instância da classe `Document` para ser utilizado posteriormente.
+        Note:
+            Only files with the `.pdf` extension are processed. The content of each page is stored as
+            an instance of the `Document` class for later use.
         """
         all_briefings = []  # Lista para armazenar todos os briefings
         for filename in os.listdir(path):
@@ -37,17 +37,17 @@ class DataLoader:
 
     def load_single_pdf(self, path):
         """
-        Carrega e processa um único arquivo PDF.
+        Loads and processes a single PDF file.
 
         Args:
-            path (str): Caminho para o arquivo PDF.
+            path (str): Path to the PDF file.
 
         Returns:
-            list: Lista de strings, onde cada string representa o conteúdo de uma página do PDF.
+            list: List of strings, where each string represents the content of a PDF page.
 
-        Obs:
-            O conteúdo das páginas é retornado como uma lista simples de strings, diferente do método 
-            `load_pdfs_from_directory`, que encapsula cada página em um objeto `Document`.
+        Note:
+            The page content is returned as a simple list of strings, unlike the `load_pdfs_from_directory` method,
+            which wraps each page in a `Document` object.
         """
         loader = PyPDFLoader(path)
         pages = loader.load_and_split()

@@ -6,20 +6,20 @@ class Retriever():
 
     class Retriever:
         """
-        Classe responsável pela criação e manipulação de um banco vetorial para buscar os trechos
-        mais relevantes relacionados a uma consulta.
+        Class responsible for creating and managing a vector store to retrieve the most relevant
+        passages related to a query.
 
-        Atributos:
-            vectorstore (Chroma): Armazena os embeddings dos documentos e realiza buscas de similaridade.
+        Attributes:
+            vectorstore (Chroma): Stores document embeddings and performs similarity searches.
         """
 
     def __init__(self, documents, embedding_model):
         """
-        Inicializa a classe Retriever com documentos e um modelo de embeddings.
+        Initializes the Retriever class with documents and an embedding model.
 
         Args:
-            documents (list): Lista de objetos `Document` representando os textos a serem indexados.
-            embedding_model (str): Nome do modelo de embeddings utilizado para criar representações vetoriais.
+            documents (list): List of `Document` objects representing the texts to be indexed.
+            embedding_model (str): Name of the embedding model used to create vector representations.
         """
         self.vectorstore = Chroma.from_documents(
             documents=documents,  
@@ -29,17 +29,16 @@ class Retriever():
 
     def _get_top_chunks(self, query, num_chunks=5, chunk_size=1000):
         """
-        Busca os `num_chunks` mais relevantes para a consulta fornecida e divide os resultados
-        em chunks do tamanho especificado.
+        Retrieves the `num_chunks` most relevant passages for the given query and splits the results
+        into chunks of the specified size.
 
         Args:
-            query (str): Consulta textual para buscar os trechos relevantes.
-            num_chunks (int, opcional): Número de trechos mais relevantes a serem retornados. Padrão é 5.
-            chunk_size (int, opcional): Tamanho máximo de cada chunk em caracteres. Padrão é 1000.
+            query (str): Textual query to search for relevant passages.
+            num_chunks (int, optional): Number of top relevant passages to return. Default is 5.
+            chunk_size (int, optional): Maximum size of each chunk in characters. Default is 1000.
 
         Returns:
-            list: Lista de strings contendo os chunks mais relevantes.
-
+            list: List of strings containing the most relevant chunks.
         """
         results = self.vectorstore.similarity_search(query, k=num_chunks)
         chunks = []
@@ -55,16 +54,15 @@ class Retriever():
 
     def get_context(self, topics, topics_chunk_size, user_topic):
         """
-        Gera um contexto organizado por tópicos baseado nos trechos mais relevantes encontrados no banco vetorial.
+        Generates a topic-organized context based on the most relevant passages retrieved from the vector store.
 
         Args:
-            topics (list): Lista de tópicos para construir a consulta.
-            topics_chunk_size (list): Lista de tamanhos de chunk para cada tópico.
-            user_topic (str): Tópico personalizado fornecido pelo usuário para refinar as consultas.
+            topics (list): List of topics to build the query.
+            topics_chunk_size (list): List of chunk sizes for each topic.
+            user_topic (str): Custom topic provided by the user to refine the queries.
 
         Returns:
-            str: Contexto formatado por tópico contendo os chunks mais relevantes.
-
+            str: Topic-formatted context containing the most relevant chunks.
         """
         context_by_topic = {}
 

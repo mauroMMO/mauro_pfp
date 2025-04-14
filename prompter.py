@@ -2,15 +2,15 @@ class Prompter():
 
     def get_researcher_system(additional_context):
         """
-        Gera a mensagem do sistema para o modelo OpenAI, estabelecendo o contexto e as instruções
-        para a criação de evidence briefings.
+        Generates the system message for the OpenAI model, establishing the context and instructions
+        for creating evidence briefings.
 
         Args:
-            additional_context (str): Contexto adicional a ser incluído na mensagem do sistema,
-                                    geralmente relacionado às seções que devem ser abordadas no briefing.
+            additional_context (str): Additional context to be included in the system message,
+                                    usually related to the sections that should be addressed in the briefing.
 
         Returns:
-            str: Mensagem formatada que define o comportamento esperado do modelo.
+            str: Formatted message that defines the expected behavior of the model.
         """
         
         return (
@@ -55,13 +55,13 @@ class Prompter():
 
     def get_researcher_human(paper):
         """
-        Gera a mensagem do usuário para o modelo OpenAI, solicitando a criação de um evidence briefing
-        com base no conteúdo do artigo fornecido.
+        Generates the user message for the OpenAI model, requesting the creation of an evidence briefing
+        based on the content of the provided article.
 
         Args:
-            paper (str): Conteúdo completo do artigo científico que será resumido.
+            paper (str): Full content of the scientific article to be summarized.
 
         Returns:
-            str: Mensagem formatada que solicita ao modelo a criação do evidence briefing.
+            str: Formatted message requesting the model to create the evidence briefing.
         """
         return (f"Write an evidence briefing on the following paper:\n{paper}")

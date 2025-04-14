@@ -4,30 +4,30 @@ from prompter import Prompter
 from retriever import Retriever
 
 class Controller:
-    """
-    Classe central do controlador para gerenciar o carregamento de dados, geração de embeddings,
-    recuperação de contexto e interação com o modelo OpenAI para gerar evidence briefings.
+        """
+        Central controller class responsible for managing data loading, embedding generation,
+        context retrieval, and interaction with the OpenAI model to produce evidence briefings.
 
-    Atributos:
-        data_loader (DataLoader): Responsável pelo carregamento de documentos PDF.
-        all_briefings (list): Coleção de todos os briefings carregados do diretório especificado.
-        vector_db (Retriever): Banco vetorial para recuperar contextos relevantes a partir de embeddings.
-        openai_model (OpenAiModel): Interface com o modelo OpenAI para processar prompts e respostas.
-        topics (list): Lista de tópicos que orientam a recuperação de contexto.
-        topics_chunk_size (list): Tamanhos de chunks correspondentes a cada tópico no banco vetorial.
-    """
+        Attributes:
+            data_loader (DataLoader): Handles loading of PDF documents.
+            all_briefings (list): Collection of all briefings loaded from the specified directory.
+            vector_db (Retriever): Vector database used to retrieve relevant contexts based on embeddings.
+            openai_model (OpenAiModel): Interface with the OpenAI model to process prompts and generate responses.
+            topics (list): List of topics that guide context retrieval.
+            topics_chunk_size (list): Chunk sizes associated with each topic in the vector database.
+        """
 
     def __init__(self, data_path, embedding_model, openai_model_name, openai_api_key, topics, topics_chunk_size):
-        """
-        Inicializa a classe Controller com os dados e configurações necessárias.
+       """
+        Initializes the Controller class with the required data and configuration.
 
         Args:
-            data_path (str): Caminho para o diretório contendo os arquivos PDF a serem carregados.
-            embedding_model (str): Nome do modelo de embeddings a ser usado para vetorização.
-            openai_model_name (str): Nome do modelo OpenAI a ser utilizado (e.g., "gpt-3.5-turbo").
-            openai_api_key (str): Chave da API para autenticar o uso do modelo OpenAI.
-            topics (list): Lista de tópicos para recuperação de contexto.
-            topics_chunk_size (list): Lista de tamanhos de chunks correspondentes a cada tópico.
+            data_path (str): Path to the directory containing the PDF files to be loaded.
+            embedding_model (str): Name of the embedding model to be used for vectorization.
+            openai_model_name (str): Name of the OpenAI model to be used (e.g., "gpt-3.5-turbo").
+            openai_api_key (str): API key used to authenticate with the OpenAI service.
+            topics (list): List of topics for context retrieval.
+            topics_chunk_size (list): List of chunk sizes corresponding to each topic.
         """
         self.data_loader = DataLoader()
         self.all_briefings = self.data_loader.load_pdfs_from_directory(data_path)
@@ -38,14 +38,14 @@ class Controller:
 
     def process(self, paper_path, user_topic):
         """
-        Processa um arquivo PDF para gerar um evidence briefing.
+        Processes a PDF file to generate an evidence briefing.
 
         Args:
-            paper_path (str): Caminho para o arquivo PDF a ser processado.
-            user_topic (str): Tópico personalizado fornecido pelo usuário para refinar a consulta.
+            paper_path (str): Path to the PDF file to be processed.
+            user_topic (str): Custom topic provided by the user to refine the query.
 
         Returns:
-            str: O evidence briefing gerado como uma saída textual.
+            str: The generated evidence briefing as a text output.
         """
         additional_context = self.vector_db.get_context(self.topics, self.topics_chunk_size, user_topic)
         system_message = Prompter.get_researcher_system(additional_context)
