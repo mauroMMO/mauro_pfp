@@ -1,3 +1,7 @@
+## Survey Instruments
+
+All the survey instruments are present in the folder "survey instruments". Both versions of the survey are present, alternating human and ai generated Evidence Briefings.
+
 ## How to Run the Project
 
 Follow the steps below to run the application:
