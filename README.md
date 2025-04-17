@@ -15,7 +15,7 @@ Follow the steps below to run the application:
 
    ```bash
    conda env create -f environment.yml
-3. Create a file named `.env` in the root of the project, following the structure provided in the included `env-sample.env`.
+3. Create a file named `env.env` in the root of the project, following the structure provided in the included `env-sample.env`.
 
    > **Note:** You must correctly insert your OpenAI API key into this new file.  
    > If you don’t have an API key yet, follow the steps below:
