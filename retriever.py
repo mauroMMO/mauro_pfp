@@ -46,8 +46,6 @@ class Retriever():
 
         for res in results:
             page_chunks = splitter.split_text(res.page_content)
-            for i, chunk in enumerate(page_chunks):
-                print(f"Chunk {i+1} encontrado para a consulta '{query}':\n{chunk}\n")  # Exibe os chunks no console
             chunks.extend(page_chunks)
         
         return chunks

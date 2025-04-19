@@ -4,21 +4,24 @@ from prompter import Prompter
 from retriever import Retriever
 
 class Controller:
-        """
-        Central controller class responsible for managing data loading, embedding generation,
-        context retrieval, and interaction with the OpenAI model to produce evidence briefings.
 
-        Attributes:
-            data_loader (DataLoader): Handles loading of PDF documents.
-            all_briefings (list): Collection of all briefings loaded from the specified directory.
-            vector_db (Retriever): Vector database used to retrieve relevant contexts based on embeddings.
-            openai_model (OpenAiModel): Interface with the OpenAI model to process prompts and generate responses.
-            topics (list): List of topics that guide context retrieval.
-            topics_chunk_size (list): Chunk sizes associated with each topic in the vector database.
-        """
+    """
+    Central controller class responsible for managing data loading, embedding generation,
+    context retrieval, and interaction with the OpenAI model to produce evidence briefings.
+
+    Attributes:
+        data_loader (DataLoader): Handles loading of PDF documents.
+        all_briefings (list): Collection of all briefings loaded from the specified directory.
+        vector_db (Retriever): Vector database used to retrieve relevant contexts based on embeddings.
+        openai_model (OpenAiModel): Interface with the OpenAI model to process prompts and generate responses.
+        topics (list): List of topics that guide context retrieval.
+        topics_chunk_size (list): Chunk sizes associated with each topic in the vector database.
+    """
+
 
     def __init__(self, data_path, embedding_model, openai_model_name, openai_api_key, topics, topics_chunk_size):
-       """
+
+        """
         Initializes the Controller class with the required data and configuration.
 
         Args:

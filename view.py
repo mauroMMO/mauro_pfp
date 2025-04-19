@@ -14,13 +14,14 @@ class View:
     """
 
     def __init__(self, controller) -> None:
-       """
+        """
         Initializes the View class with the controller required to process the files.
 
         Args:
             controller: Instance of a controller object that handles file processing
-                        and manages interactions between system modules.
+                    and manages interactions between system modules.
         """
+
         self.controller = controller
         st.set_page_config(layout="wide", page_title="Gerador de Evidence Briefings")
 
