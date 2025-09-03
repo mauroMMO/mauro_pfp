@@ -30,7 +30,7 @@ class DataLoader:
                 file_path = os.path.join(path, filename)
                 loader = PyPDFLoader(file_path)
                 pages = loader.load_and_split()
-                paper_content = [page.page_content for page in pages]
+                paper_content = [page.page_content.replace('\n', ' ') for page in pages]
                 for content in paper_content:
                     all_briefings.append(Document(page_content=content))  # Armazena como objetos `Document`
         return all_briefings
@@ -51,5 +51,5 @@ class DataLoader:
         """
         loader = PyPDFLoader(path)
         pages = loader.load_and_split()
-        paper_content = [page.page_content for page in pages]
+        paper_content = [page.page_content.replace('\n', ' ') for page in pages]
         return paper_content

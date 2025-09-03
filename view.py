@@ -1,4 +1,6 @@
 import streamlit as st
+import matplotlib.pyplot as plt
+import seaborn as sns
 import os
 
 class View:
@@ -111,3 +113,26 @@ class View:
             else:
                 st.info("Nenhum resultado disponível.")
 
+    def plot_aggregated_scores(aggregated_scores, output_path="aggregated_scores.png"):
+        """
+        Creates an img of the aggregated scores (eval)
+        """
+        sns.set_style("whitegrid")
+        metrics = {
+            'ROUGE-L': aggregated_scores['ROUGE']['rougeL'],
+            'BLEU': aggregated_scores['BLEU']['bleu'],
+            'METEOR': aggregated_scores['METEOR']['meteor']
+        }
+        
+        fig, ax = plt.subplots(figsize=(10, 6))
+        sns.barplot(x=list(metrics.keys()), y=list(metrics.values()), ax=ax, palette="viridis")
+        ax.set_title('Performance Agregada do Modelo', fontsize=16)
+        ax.set_ylabel('Pontuação', fontsize=12)
+        ax.set_ylim(0, max(list(metrics.values())) * 1.2)
+        for index, value in enumerate(metrics.values()):
+            ax.text(index, value + 0.01, f"{value:.3f}", ha='center', fontsize=11)
+        
+        plt.tight_layout()
+        fig.savefig(output_path)
+        plt.close(fig) # Fecha a figura para liberar memória
+        print(f"Gráfico de scores agregados salvo em: {output_path}")
